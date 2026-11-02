@@ -34,6 +34,7 @@ jobs:
         run: node scripts/download-spec.mjs
         env:
           EASYDMARC_PUBLIC_API_SPEC_URL: ${{ vars.EASYDMARC_PUBLIC_API_SPEC_URL }}
+          EASYDMARC_DEV_API_SPEC_URL: ${{ vars.EASYDMARC_DEV_API_SPEC_URL }}
 
       - name: Clean generated docs and sidebar
         # The plugin never overwrites an existing sidebar.ts, so the committed one would shadow the fresh spec.

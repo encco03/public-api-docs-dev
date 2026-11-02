@@ -6,12 +6,13 @@ import { myCustomApiMdGenerator } from "./customMdGenerators";
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const easydmarcPublicApiSpecPath = 'specs/easydmarc-openapi.json';
+const easydmarcDevApiSpecPath = 'specs/easydmarc-openapi-dev.json';
 
 const baseUrl = process.env.BASE_URL || '/';
 
 const config: Config = {
   title: 'EasyDMARC',
-  tagline: 'API Docs (stage preview)',
+  tagline: 'API Docs (stage and dev preview)',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -86,6 +87,23 @@ const config: Config = {
             },
             // markdownGenerators: { createApiPageMD: myCustomApiMdGenerator },
           } satisfies OpenApiPlugin.Options,
+          // Dev namespace: only the routes the gateway exposes under /dev/... (labelled env=dev).
+          "dev-api": {
+            label: "Dev API",
+            baseUrl: "https://testapi.easydmarc.am",
+            specPath: easydmarcDevApiSpecPath,
+            downloadUrl: 'https://testapi.easydmarc.am/openapi/easydmarc-public-api-dev.json',
+            outputDir: "docs/dev-api",
+            showExtensions: true,
+            showSchemas: false,
+
+            sidebarOptions: {
+              groupPathsBy: "tagGroup",
+              categoryLinkSource: "info",
+              sidebarCollapsed: true,
+              sidebarCollapsible: true,
+            },
+          } satisfies OpenApiPlugin.Options,
         }
       },
     ]
@@ -110,7 +128,13 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'public-api',
           position: 'left',
-          label: 'API',
+          label: 'API (stage)',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'dev-api',
+          position: 'left',
+          label: 'API (dev)',
         },
         {href: 'https://easydmarc.com/blog/category/blog', label: 'Blog', position: 'right'},
         {href: 'https://easydmarc.com/tools', label: 'Tools', position: 'right'},

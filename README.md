@@ -32,9 +32,28 @@
 - **Users** — Create and manage user accounts, update personal info, and control access.
 - **Webhooks** — Create, update, delete, and monitor webhook deliveries for real-time event notifications.
 
+## Preview site (stage and dev)
+
+This fork is the internal preview of the docs, published to [developers.easydmarc.am](https://developers.easydmarc.am)
+from GitHub Pages. It is rebuilt on every push to `main`, on a manual run, and every six hours, from the live
+bundles the stage API gateway (`testapi.easydmarc.am`) generates from its own routes:
+
+| Section     | Spec                                                                    | Paths                                        |
+|-------------|-------------------------------------------------------------------------|----------------------------------------------|
+| API (stage) | `https://testapi.easydmarc.am/openapi/easydmarc-public-api.json`        | `/v1/...` → stage namespace                  |
+| API (dev)   | `https://testapi.easydmarc.am/openapi/easydmarc-public-api-dev.json`    | `/dev/v1/...` → dev namespace (routes labelled `env=dev`) |
+
+Both sections are served by the same gateway host, so "Try it" calls run against stage or dev, never production.
+A dev route appears here only once it exists on the gateway with the `env=dev` and `type=public-api` labels.
+
+The spec URLs are repository variables (`EASYDMARC_PUBLIC_API_SPEC_URL`, `EASYDMARC_DEV_API_SPEC_URL`) read by
+`.github/workflows/deploy.yml`. The workflow downloads both, runs `docusaurus clean-api-docs all` (the plugin never
+overwrites an existing `sidebar.ts`, so without this step new endpoints never reach the sidebar) and regenerates.
+
 ## OpenAPI Specification
 
-The full OpenAPI spec is available at [`specs/easydmarc-openapi.json`](specs/easydmarc-openapi.json).
+The specs are checked in at [`specs/easydmarc-openapi.json`](specs/easydmarc-openapi.json) (stage) and
+[`specs/easydmarc-openapi-dev.json`](specs/easydmarc-openapi-dev.json) (dev).
 
 ## Quick Start
 
