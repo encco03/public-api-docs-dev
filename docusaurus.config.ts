@@ -11,19 +11,19 @@ const baseUrl = process.env.BASE_URL || '/';
 
 const config: Config = {
   title: 'EasyDMARC',
-  tagline: 'API Docs',
+  tagline: 'API Docs (stage preview)',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://developers.easydmarc.com',
+  url: 'https://encco03.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: baseUrl,
 
-  organizationName: 'easydmarc',
-  projectName: 'public-api-docs',
+  organizationName: 'encco03',
+  projectName: 'public-api-docs-dev',
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
@@ -71,9 +71,9 @@ const config: Config = {
         config: {
           "public-api": {
             label: "Public API",
-            baseUrl: "https://api2.easydmarc.com",
+            baseUrl: "https://testapi.easydmarc.am",
             specPath: easydmarcPublicApiSpecPath,
-            downloadUrl: 'https://raw.githubusercontent.com/easydmarc/public-api-docs/main/specs/easydmarc-openapi.json',
+            downloadUrl: 'https://testapi.easydmarc.am/openapi/easydmarc-public-api.json',
             outputDir: "docs/public-api",
             showExtensions: true,
             showSchemas: false,
@@ -114,7 +114,7 @@ const config: Config = {
         },
         {href: 'https://easydmarc.com/blog/category/blog', label: 'Blog', position: 'right'},
         {href: 'https://easydmarc.com/tools', label: 'Tools', position: 'right'},
-        {href: 'https://github.com/easydmarc/public-api-docs', label: 'GitHub', position: 'right'},
+        {href: 'https://github.com/encco03/public-api-docs-dev', label: 'GitHub', position: 'right'},
         {type: 'search', position: 'right'},
         {href: 'https://app.easydmarc.com/login', label: 'Log In', position: 'right'},
         {href: 'https://app.easydmarc.com/register', label: 'Sign Up Free', position: 'right', className: 'navbar-signup-btn'},

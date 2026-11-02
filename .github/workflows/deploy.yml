@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: '0 */6 * * *'   # follow the stage gateway bundle without a commit
 
 permissions:
   contents: read
@@ -28,6 +30,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Download the live spec
+        run: node scripts/download-spec.mjs
+        env:
+          EASYDMARC_PUBLIC_API_SPEC_URL: ${{ vars.EASYDMARC_PUBLIC_API_SPEC_URL }}
+
       - name: Generate API docs
         run: npx docusaurus gen-api-docs all
         env:
@@ -37,7 +44,7 @@ jobs:
         run: npx docusaurus build
         env:
           EASYDMARC_PUBLIC_API_SPEC_URL: ${{ vars.EASYDMARC_PUBLIC_API_SPEC_URL }}
-          #BASE_URL: /${{ github.event.repository.name }}/
+          BASE_URL: /${{ github.event.repository.name }}/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
