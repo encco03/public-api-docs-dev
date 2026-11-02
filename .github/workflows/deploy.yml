@@ -48,7 +48,8 @@ jobs:
         run: npx docusaurus build
         env:
           EASYDMARC_PUBLIC_API_SPEC_URL: ${{ vars.EASYDMARC_PUBLIC_API_SPEC_URL }}
-          BASE_URL: /${{ github.event.repository.name }}/
+          # custom domain developers.easydmarc.am serves the site at the root
+          BASE_URL: /
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
