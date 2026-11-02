@@ -35,6 +35,10 @@ jobs:
         env:
           EASYDMARC_PUBLIC_API_SPEC_URL: ${{ vars.EASYDMARC_PUBLIC_API_SPEC_URL }}
 
+      - name: Clean generated docs and sidebar
+        # The plugin never overwrites an existing sidebar.ts, so the committed one would shadow the fresh spec.
+        run: npx docusaurus clean-api-docs all
+
       - name: Generate API docs
         run: npx docusaurus gen-api-docs all
         env:
